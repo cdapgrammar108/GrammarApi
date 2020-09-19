@@ -11,8 +11,6 @@ pool:
 
 steps:
 - script: |
-    git config --global user.name "it17133746"
-    git config --global user.password "fbz7sm4e7bwdgv3iug3odtpb2kxbh6bkq526xnagdycxaf4ap5ra"
     git config --global --add filter.lfs.required true
     git config --global --add filter.lfs.smudge "git-lfs smudge -- %f"
     git config --global --add filter.lfs.process "git-lfs filter-process"
@@ -20,5 +18,5 @@ steps:
   displayName: Configure LFS for use with
 - checkout: self
   lfs: true
-
+- script: ls
 # ... rest of steps ...
