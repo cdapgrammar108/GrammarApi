@@ -18,5 +18,5 @@ steps:
   displayName: Configure LFS for use with
 - checkout: self
   lfs: true
-- script: ls
+- script: ls -sh
 # ... rest of steps ...
