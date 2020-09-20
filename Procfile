@@ -1,1 +1,1 @@
-web: gunicore main: app
+web: gunicore app: app
