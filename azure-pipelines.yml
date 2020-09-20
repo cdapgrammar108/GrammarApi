@@ -34,24 +34,10 @@ steps:
   
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)'
-    includeRootFolder: false
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
-- publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
-  displayName: 'Upload package'
-  artifact: drop
   
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'GLIB-Service-Acc'
-    appType: 'webAppLinux'
-    appName: 'grammarapi'
-    deployToSlotOrASE: true
-    resourceGroupName: 'grammarapi'
-    slotName: 'production'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    runtimeStack: 'PYTHON|3.6'
-    startUpCommand: 'gunicorn --bind=0.0.0.0 --workers=4 startup:app'
 
