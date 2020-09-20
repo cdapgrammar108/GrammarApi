@@ -50,4 +50,5 @@ steps:
     ResourceGroupName: 'grammarapi'
     SlotName: 'production'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    startUpCommand: 'gunicorn --bind=0.0.0.0 --workers=4 app:app'
 
