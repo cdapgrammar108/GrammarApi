@@ -8,4 +8,4 @@ spacy~=2.2.4
 requests~=2.23.0
 numpy~=1.18.4
 Werkzeug==0.16.1
-hunspell
+tensorflow
