@@ -1,4 +1,5 @@
 import torch
+import torch.hub
 from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM
 import logging
 from keras.preprocessing.sequence import pad_sequences
@@ -20,6 +21,7 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 def grammerFunc(inputSentence):
     valueOutput = []
+    score = 0
 
     def check_GE(sents):
         """Check of the input sentences have grammatical errors
@@ -157,8 +159,8 @@ def grammerFunc(inputSentence):
     # !pip install cyhunspell
 
     # download the gn_GB dictionary for hunspell
-    download_file_from_google_drive("1jC5BVF9iZ0gmRQNmDcZnhfFdEYv8RNok", "./en_GB-large.dic")
-    download_file_from_google_drive("1g8PO8kdw-YmyOY_HxjnJ5FfdJFX4bsPv", "./en_GB-large.aff")
+    # download_file_from_google_drive("1jC5BVF9iZ0gmRQNmDcZnhfFdEYv8RNok", "./en_GB-large.dic")
+    # download_file_from_google_drive("1g8PO8kdw-YmyOY_HxjnJ5FfdJFX4bsPv", "./en_GB-large.aff")
 
     gb = Hunspell("en_GB-large", hunspell_data_dir=".")
 
@@ -447,5 +449,6 @@ def grammerFunc(inputSentence):
             softmax = [j / sum_of_exps for j in exps]
             print("{0} - {1:0.4f}%".format(sentences[i], softmax[1] * 100))
             valueOutput = sentences[i]
+            score = softmax[1] * 100
 
-    return valueOutput
+    return valueOutput, score

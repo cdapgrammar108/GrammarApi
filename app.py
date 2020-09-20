@@ -7,10 +7,11 @@ app = flask.Flask(__name__)
 @app.route('/grammar', methods=['POST'])
 def main():
     try:
-        output = grammerFunc(request.form.get("sentence"))
+        output, score = grammerFunc(request.form.get("sentence"))
         return jsonify({
             'status': 200,
-            'body': {'value': output},
+            'value': output,
+            'score': score
         })
     except Exception as e:
         return jsonify({
@@ -25,4 +26,4 @@ def mainPage():
 
 
 if __name__ == '__main__':
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=5000, host='192.168.8.104')
